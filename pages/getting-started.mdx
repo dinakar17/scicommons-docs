@@ -1,0 +1,199 @@
+This section provides a comprehensive guide to setting up and running your project, which consists of a frontend implemented using Next.js and a backend using Django. You can find detailed info on why this stack is chosen in the “xyz” section.
+
+## Prerequisites
+
+Ensure you have the following software and tools installed:
+
+- **Operating System:** Windows, macOS, or Linux
+
+- **Software:**
+
+  - Python 3.8+
+  - Node.js 20+
+  - Django 3.2+
+  - Next.js 13+
+  - Anaconda
+  - Git
+  - Docker (optional)
+
+- **Hardware:**
+  - Minimum 8 GB RAM
+  - 20 GB free disk space
+
+## Installation Guide
+
+### Step 1: Set Up the Backend (Django)
+
+1. **Clone the Repository**
+
+```shell copy
+git clone https://github.com/dinakar17/scicommons-backend-revamp.git
+cd scicommons-backend-revamp
+```
+
+2. **Create and activate a virtual environment using Anaconda:**
+
+```shell copy
+conda create -n <env_name> python=3.12.3
+conda activate <env_name>
+pip install poetry
+```
+
+3. **Install the required Python packages using poetry:**
+
+```shell copy
+poetry install
+```
+
+4. **Create a .env and add the environment variables present in the .env.example file**
+
+```markdown filename=".env.example"
+# Django
+
+EMAIL_HOST_USER = # The email address to be used for sending emails from your Django application
+EMAIL_HOST_PASSWORD = # The password associated with the EMAIL_HOST_USER
+EMAIL_PORT = # The port number to be used for sending emails (e.g., 587 for Gmail)
+EMAIL_USE_TLS = # A boolean value (True or False) indicating whether to use TLS encryption for email communication
+DEFAULT_FROM_EMAIL = # The default email address to be used as the "from" address when sending emails from your Django application
+
+# Database
+
+DB_NAME = # The name of your database
+DB_USER = # The username to be used for connecting to the database
+DB_PASSWORD = # The password associated with the DB_USER
+DB_HOST = # The hostname or IP address of the database server
+DB_PORT = # The port number to be used for connecting to the database
+DATABASE_URL = # A URL-style string containing all the database connection details (e.g., postgres://user:password@host:port/dbname)
+
+# Frontend URL
+
+FRONTEND_URL = # The URL of your frontend application
+
+# AWS S3 Configuration
+
+AWS_ACCESS_KEY_ID = # The access key ID for your AWS account
+AWS_SECRET_ACCESS_KEY= # The secret access key for your AWS account
+AWS_STORAGE_BUCKET_NAME = # The name of the S3 bucket to be used for storing files
+AWS_S3_REGION_NAME = # The region name of the S3 bucket (e.g., us-east-1)
+```
+
+```shell copy
+touch env
+cp .env.example .env
+```
+
+5. **Apply database migrations:**
+
+```shell copy
+poetry run python manage.py migrate
+```
+
+6. **Create a superuser:**
+
+```shell copy
+poetry run python manage.py createsuperuser
+```
+
+7. **Start the Django development server:**
+
+```shell copy
+poetry run python manage.py runserver
+```
+
+You can now access the server at [http://localhost:8000/](http://localhost:8000/) and API documentation at [http://localhost:8000/api/docs/](http://localhost:8000/api/docs/)
+
+### Step 2: Set Up the Frontend (Next.js)
+
+1. **Clone the Repository and Navigate to the frontend directory:**
+
+```shell copy
+git clone https://github.com/dinakar17/scicommons-frontend-nextjs.git
+cd frontend
+```
+
+2. **Create a .env.local and add the environment variables present in the .env.example file**
+
+```markdown filename=".env.example"
+NEXT_PUBLIC_BACKEND_URL=http://localhost:8000 # URL of the backend server
+```
+
+```shell copy
+touch env
+cp .env.example .env.local
+```
+
+3. **Install the required Node.js packages:**
+
+```shell copy
+yarn
+```
+
+4. **Start the Next.js development server:**
+
+```shell copy
+yarn dev
+```
+
+## Quick Start
+
+- **Access the Frontend:** Open your web browser and go to `http://localhost:3000` to see the project running.
+- **Access the backend admin panel:** Open your web browser and go to `http://localhost:8000/admin` and log in using the superuser credentials created during the setup.
+- **Explore core features:** Create a user, post an article, join a community, and view posts.
+
+## Configuration Guide
+
+**Database Configuration:**
+
+- Update the `DATABASES` setting in `settings.py` to reflect your database configuration.
+
+**Static Files:**
+
+Ensure static files are properly configured in `settings.py`:
+
+```python filename="settings.py" copy
+STATIC_URL = '/static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+```
+
+**Deployment:**
+
+- For deployment, follow these additional steps:
+  - Use a web server like Gunicorn for Django.
+  - Use a reverse proxy like Nginx.
+  - Set up environment-specific settings in `settings.py`.
+
+Ensure the static files are collected:
+
+    ```shell copy
+    python manage.py collectstatic
+    ```
+
+## Testing
+
+**Backend Tests:**
+
+```shell copy
+python manage.py test
+```
+
+**Frontend Tests:**
+
+```shell copy
+npm test
+```
+
+## Troubleshooting
+
+**Issue: Port 8000 is already in use**
+
+**Solution:** Change the port number in `manage.py`:
+
+`python manage.py runserver 8080`
+
+**Issue: ModuleNotFoundError**
+
+- **Solution:** Ensure all dependencies are installed and the virtual environment is activated.
+
+**Issue: Next.js API routes not working**
+
+- **Solution:** Ensure your API routes in Next.js match the expected paths and that the Next.js server is running.

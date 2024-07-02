@@ -1,0 +1,394 @@
+## Overview
+
+The project consists of two main components: the Frontend implemented using Next.js and the Backend developed with Django. This section provides an overview of the directory structure for both components, explaining the purpose of each directory and significant files within them. This structure helps in maintaining a clean, organized codebase, facilitating easier navigation and development.
+
+## Frontend (Next.js)
+
+The Next.js frontend is structured to separate concerns effectively, ensuring a scalable and maintainable codebase. Below is the typical directory layout for the Next.js project:
+
+```markdown copy
+└── 📁scicommons-frontend-nextjs
+    └── .env.example
+    └── .env.local
+    └── .eslintrc
+    └── .gitignore
+    └── 📁.husky
+    └── .huskyrc
+    └── .lintstagedrc.js
+    └── .prettierrc
+    └── 📁.vscode
+        └── settings.json
+        └── extensions.json
+    └── next-env.d.ts
+    └── next.config.mjs
+    └── orval.config.ts
+    └── package.json
+    └── postcss.config.mjs
+    └── 📁public
+    └── README.md
+    └── 📁src
+        └── 📁api
+        └── 📁app
+            └── 📁(authentication)
+                └── 📁auth
+                    └── 📁activate
+                        └── 📁[token]
+                            └── page.tsx
+                    └── 📁forgotpassword
+                        └── page.tsx
+                    └── 📁login
+                        └── page.tsx
+                    └── 📁register
+                        └── page.tsx
+                    └── 📁resendverificationemail
+                        └── page.tsx
+                    └── 📁resetpassword
+                        └── 📁[token]
+                            └── page.tsx
+                    └── 📁signupsuccess
+                        └── page.tsx
+            └── 📁(main)
+                └── 📁(articles)
+                    └── 📁article
+                        └── 📁[slug]
+                            └── 📁(articledashboard)
+                                └── 📁community-stats
+                                    └── page.tsx
+                                └── layout.tsx
+                                └── 📁notifications
+                                    └── page.tsx
+                                └── 📁official-stats
+                                    └── page.tsx
+                                └── 📁settings
+                                    └── AddFAQs.tsx
+                                    └── EditArticleDetails.tsx
+                                    └── page.tsx
+                                └── 📁submit
+                                    └── ArticleSubmissionStatus.tsx
+                                    └── page.tsx
+                                    └── SubmitToCommunity.tsx
+                            └── 📁(displayarticle)
+                                └── ArticleStats.tsx
+                                └── DisplayArticle.tsx
+                                └── DisplayFAQs.tsx
+                                └── page.tsx
+                                └── ReactQuill.tsx
+                                └── RelevantArticles.tsx
+                                └── ReviewCard.tsx
+                                └── ReviewForm.tsx
+                    └── 📁articles
+                        └── page.tsx
+                    └── 📁submitarticle
+                        └── page.tsx
+                └── 📁(communities)
+                    └── 📁communities
+                        └── page.tsx
+                    └── 📁community
+                        └── 📁[slug]
+                            └── 📁(admin)
+                                └── 📁dashboard
+                                    └── page.tsx
+                                └── 📁invite
+                                    └── page.tsx
+                                    └── Registered.tsx
+                                    └── StatusList.tsx
+                                    └── UnRegistered.tsx
+                                └── layout.tsx
+                                └── 📁preferences
+                                    └── AddRules.tsx
+                                    └── EditCommunityDetails.tsx
+                                    └── page.tsx
+                                └── 📁requests
+                                    └── page.tsx
+                                    └── RequestListItem.tsx
+                                    └── RequestsList.tsx
+                                └── 📁roles
+                                    └── page.tsx
+                                    └── UsersListItem.tsx
+                                └── 📁submissions
+                                    └── page.tsx
+                            └── 📁(displaycommunity)
+                                └── ArticleSubmission.tsx
+                                └── CommunityRules.tsx
+                                └── CommunityStats.tsx
+                                └── DisplayCommunity.tsx
+                                └── page.tsx
+                            └── 📁articles
+                                └── 📁[postId]
+                                    └── CommunityArticleStats.tsx
+                                    └── CommunityCommentForm.tsx
+                                    └── CommunityRelevantArticles.tsx
+                                    └── page.tsx
+                            └── 📁createcommunityarticle
+                                └── page.tsx
+                            └── 📁invitations
+                                └── 📁registered
+                                    └── 📁[invitation_id]
+                                        └── page.tsx
+                                └── 📁unregistered
+                                    └── 📁[invitation_id]
+                                        └── 📁[signed_email]
+                                            └── page.tsx
+                    └── 📁createcommunity
+                        └── OptionCard.tsx
+                        └── page.tsx
+                └── 📁(users)
+                    └── 📁mycontributions
+                        └── page.tsx
+                        └── TabContent.tsx
+                        └── UserProfileStats.tsx
+                    └── 📁myprofile
+                        └── page.tsx
+                        └── PersonalLinks.tsx
+                        └── ProfessionalStatus.tsx
+                        └── Profile.tsx
+                    └── 📁notifications
+                        └── page.tsx
+                └── layout.tsx
+            └── favicon.ico
+            └── globals.css
+            └── layout.tsx
+            └── page.tsx
+        └── 📁components
+            └── 📁animations
+                └── CheckMarkAnimation.tsx
+            └── 📁articles
+                └── ArticleCard.tsx
+                └── ArticleHighlightCard.tsx
+                └── SearchComponent.tsx
+                └── SubmitArticleForm.tsx
+            └── Comment.tsx
+            └── 📁communities
+                └── CommunityCard.tsx
+                └── CommunityHighlightCard.tsx
+                └── OptionCard.tsx
+                └── TabComponent.tsx
+            └── FileUpload.tsx
+            └── Footer.tsx
+            └── FormInput.tsx
+            └── GifReloader.tsx
+            └── ImageUpload.tsx
+            └── LabeledToolTip.tsx
+            └── 📁loaders
+                └── CommunityInvitationSkeletonLoader.tsx
+                └── DisplayArticleSkeletonLoader.tsx
+                └── DisplayCommunitySkeletonLoader.tsx
+            └── MultiLabelSelector.tsx
+            └── NavBar.tsx
+            └── 📁richtexteditor
+                └── CommentEditor.tsx
+                └── MenuBar.tsx
+                └── TipTap.tsx
+            └── SearchBar.tsx
+            └── Sidebar.tsx
+            └── 📁ui
+        └── 📁constants
+            └── dummyData.tsx
+        └── 📁hooks
+            └── useAuthHeaders.ts
+            └── useStore.ts
+        └── 📁lib
+            └── utils.ts
+        └── middleware.ts
+        └── 📁stores
+            └── authStore.ts
+            └── useFetchExternalArticleStore.ts
+        └── 📁types
+            └── index.ts
+    └── tailwind.config.ts
+    └── tsconfig.json
+    └── tsconfig.tsbuildinfo
+    └── yarn.lock
+```
+
+### Root Directory
+
+
+
+* **.env.example**: Shows sample environment variables needed.
+* **.env.local**: Your local environment variables for development.
+* **.eslintrc**: Configures ESLint for code linting.
+* **.gitignore**: Lists files Git should ignore.
+* **.husky/**: Contains Git hooks for pre-commit checks.
+* **.lintstagedrc.js**: Runs linters on staged files before committing.
+* **.prettierrc**: Configures Prettier for code formatting.
+* **package.json**: Lists dependencies and scripts for the project.
+* **README.md**: Documentation about the project.
+* **tsconfig.json**: TypeScript configuration settings.
+* **yarn.lock**: Ensures consistent versions of dependencies.
+
+
+### src Directory
+
+
+
+* **api/**: Configuration and setup for API-related code.
+* **app/**: Main app pages and routes.
+    * **(authentication)/auth/**: Handles authentication (login, register, etc.).
+    * **(main)**: Main content areas.
+        * **(articles)**: Pages related to articles.
+        * **(communities)**: Pages related to communities.
+        * **(users)**: Pages related to user profiles and activities.
+    * **layout.tsx**: Layout component for the app.
+    * **globals.css**: Global styles for the app.
+
+
+### components Directory
+
+
+
+* **common components/**: Reusable UI components.
+    * **NavBar.tsx**: The navigation bar.
+    * **Footer.tsx**: The footer.
+    * **FormInput.tsx**: Common form input field.
+    * **SearchBar.tsx**: Search bar.
+
+
+### Configuration Files
+
+
+
+* **next.config.mjs**: Next.js configuration.
+* **tailwind.config.ts**: TailwindCSS configuration.
+* **postcss.config.mjs**: PostCSS configuration.
+
+
+### Other Directories
+
+
+
+* **public/**: Static files like images and icons.
+* **hooks/**: Custom React hooks.
+* **lib/**: Utility functions.
+* **stores/**: State management stores.
+* **types/**: TypeScript type definitions.
+
+## Backend (Django)
+
+The Django backend is organized to keep applications modular and maintainable. Below is the typical directory layout for the Django project:
+
+```markdown copy
+└── 📁scicommons-backend-revamp
+    └── .dockerignore
+    └── .env
+    └── .env.example
+    └── .flake8
+    └── .gitignore
+    └── .pre-commit-config.yaml
+    └── 📁admin
+    └── 📁articles
+        └── api.py
+        └── api_review.py
+        └── 📁migrations
+        └── models.py
+        └── schemas.py
+        └── __init__.py
+    └── 📁communities
+        └── api.py
+        └── api_admin.py
+        └── api_invitation.py
+        └── api_join.py
+        └── api_posts.py
+        └── 📁migrations
+        └── models.py
+        └── schemas.py
+        └── __init__.py
+    └── docker-compose.yml
+    └── Dockerfile
+    └── manage.py
+    └── 📁myapp
+        └── api.py
+        └── asgi.py
+        └── middleware.py
+        └── settings.py
+        └── urls.py
+        └── wsgi.py
+        └── __init__.py
+    └── poetry.lock
+    └── 📁posts
+        └── models.py
+        └── __init__.py
+    └── pyproject.toml
+    └── README.md
+    └── 📁static                    
+    └── 📁users
+        └── api.py
+        └── api_auth.py
+        └── auth.py
+        └── 📁migrations
+        └── models.py
+        └── schemas.py
+        └── __init__.py
+```
+
+### Project Root Directory
+
+- **.dockerignore**: Specifies files and directories to ignore when building Docker images.
+- **.env**: Environment variables for the project.
+- **.env.example**: Sample environment variables file.
+- **.flake8**: Configuration for flake8, a Python code linter.
+- **.gitignore**: Specifies files for Git to ignore.
+- **.pre-commit-config.yaml**: Configuration for pre-commit hooks to enforce code quality.
+- **docker-compose.yml**: Configuration for Docker Compose to manage multi-container Docker applications.
+- **Dockerfile**: Instructions to build a Docker image for the project.
+- **manage.py**: Django's command-line utility for administrative tasks.
+- **poetry.lock**: Ensures consistent dependency versions for Poetry.
+- **pyproject.toml**: Configuration file for Poetry and other tools.
+- **README.md**: Project documentation.
+
+### Application Directories
+
+- **admin/**:
+
+  - Contains admin-specific configurations and management scripts.
+
+- **articles/**:
+
+  - **api.py**: API endpoints related to articles.
+  - **api_review.py**: API endpoints related to article reviews.
+  - **migrations/**: Database migrations for the articles app.
+  - **models.py**: Database models for articles.
+  - **schemas.py**: Data validation schemas for articles.
+  - **init.py**: Initializes the articles app.
+
+- **communities/**:
+
+  - **api.py**: API endpoints related to communities.
+  - **api_admin.py**: API endpoints for community admins.
+  - **api_invitation.py**: API endpoints for community invitations.
+  - **api_join.py**: API endpoints for joining communities.
+  - **api_posts.py**: API endpoints for community posts.
+  - **migrations/**: Database migrations for the communities app.
+  - **models.py**: Database models for communities.
+  - **schemas.py**: Data validation schemas for communities.
+  - **init.py**: Initializes the communities app.
+
+- **myapp/**:
+
+  - **api.py**: Central API configuration.
+  - **asgi.py**: ASGI configuration for asynchronous support.
+  - **middleware.py**: Custom middleware for the project.
+  - **settings.py**: Project settings and configurations.
+  - **urls.py**: URL routing for the project.
+  - **wsgi.py**: WSGI configuration for deploying the application.
+  - **init.py**: Initializes the myapp module.
+
+- **posts/**:
+
+  - **models.py**: Database models for posts.
+  - **init.py**: Initializes the posts app.
+
+- **static/**:
+
+  - Directory for static files like CSS, JavaScript, and images.
+
+- **users/**:
+  - **api.py**: API endpoints related to users.
+  - **api_auth.py**: API endpoints for user authentication.
+  - **auth.py**: Authentication logic.
+  - **migrations/**: Database migrations for the users app.
+  - **models.py**: Database models for users.
+  - **schemas.py**: Data validation schemas for users.
+  - **init.py**: Initializes the users app.
+
+By organizing the project in this way, both frontend and backend development can proceed independently while maintaining a clear structure that facilitates collaboration and scalability.

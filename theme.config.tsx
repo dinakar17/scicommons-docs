@@ -1,18 +1,38 @@
-import React from 'react'
-import { DocsThemeConfig } from 'nextra-theme-docs'
+import React from "react";
+import { DocsThemeConfig } from "nextra-theme-docs";
 
 const config: DocsThemeConfig = {
-  logo: <span>My Project</span>,
+  logo: <span>SciCommons Docs</span>,
   project: {
-    link: 'https://github.com/shuding/nextra-docs-template',
+    link: "https://github.com",
   },
   chat: {
-    link: 'https://discord.com',
+    link: "https://discord.com",
   },
-  docsRepositoryBase: 'https://github.com/shuding/nextra-docs-template',
+  docsRepositoryBase: "https://github.com/",
   footer: {
-    text: 'Nextra Docs Template',
+    text: "SciCommons documentation",
   },
-}
+  useNextSeoProps() {
+    return {
+      titleTemplate: "%s - SciCommons Docs",
+      description: "SciCommons documentation",
+      openGraph: {
+        type: "website",
+        url: "https://scicommons.org",
+        title: "SciCommons Docs",
+        description: "SciCommons documentation",
+        images: [
+          {
+            url: "https://via.placeholder.com/800x600.png?text=SciCommons+Docs",
+            width: 800,
+            height: 600,
+            alt: "SciCommons Docs",
+          },
+        ],
+      },
+    };
+  },
+};
 
-export default config
+export default config;
